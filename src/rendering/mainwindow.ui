@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1453</width>
+    <height>998</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1453</width>
+    <height>998</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1453</width>
+    <height>998</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QDoubleSpinBox" name="rotation_x">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>50</y>
+      <width>131</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-6.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>6.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rotation_y">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>110</y>
+      <width>131</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-6.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>6.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rotation_z">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>170</y>
+      <width>131</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-6.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>6.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="scale">
+    <property name="geometry">
+     <rect>
+      <x>1280</x>
+      <y>170</y>
+      <width>131</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>10.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="transfer_y">
+    <property name="geometry">
+     <rect>
+      <x>1280</x>
+      <y>105</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-10.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>10.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="transfer_x">
+    <property name="geometry">
+     <rect>
+      <x>1280</x>
+      <y>50</y>
+      <width>131</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-10.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>10.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="openFile">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>470</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Open file</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="fileName">
+    <property name="geometry">
+     <rect>
+      <x>4</x>
+      <y>320</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="countVertex">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>191</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="countIndex">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>420</y>
+      <width>191</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1290</x>
+      <y>270</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Цвет виджета</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rW">
+    <property name="geometry">
+     <rect>
+      <x>1240</x>
+      <y>320</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="gW">
+    <property name="geometry">
+     <rect>
+      <x>1290</x>
+      <y>320</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="bW">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>320</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="aW">
+    <property name="geometry">
+     <rect>
+      <x>1390</x>
+      <y>320</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1290</x>
+      <y>370</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Цвет вершин</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>460</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Цвет ребер</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>1240</x>
+      <y>580</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ширина вершин</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>1240</x>
+      <y>630</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ширина ребер</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rV">
+    <property name="geometry">
+     <rect>
+      <x>1250</x>
+      <y>410</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="gV">
+    <property name="geometry">
+     <rect>
+      <x>1320</x>
+      <y>410</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="bV">
+    <property name="geometry">
+     <rect>
+      <x>1380</x>
+      <y>410</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="rL">
+    <property name="geometry">
+     <rect>
+      <x>1250</x>
+      <y>500</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="gL">
+    <property name="geometry">
+     <rect>
+      <x>1320</x>
+      <y>500</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="bL">
+    <property name="geometry">
+     <rect>
+      <x>1390</x>
+      <y>500</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="widthVertex">
+    <property name="geometry">
+     <rect>
+      <x>1380</x>
+      <y>580</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>15.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>3.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="widthLine">
+    <property name="geometry">
+     <rect>
+      <x>1380</x>
+      <y>630</y>
+      <width>45</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <double>15.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>1.000000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="Rendering" name="openGLWidget">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>0</y>
+      <width>1011</width>
+      <height>1001</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Rendering</class>
+   <extends>QOpenGLWidget</extends>
+   <header location="global">rendering.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
