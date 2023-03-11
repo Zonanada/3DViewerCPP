@@ -79,7 +79,7 @@ class Rendering {
         std::vector <unsigned int> &get_indexes();
         
     private:
-        void apply_state(std::vector <double> &vertexes);
+        void apply_state();
         void rotate_by_x(unsigned index_value_y, unsigned index_value_z);
         void rotate_by_y(unsigned index_value_x, unsigned index_value_z);
         void rotate_by_z(unsigned index_value_x, unsigned index_value_y);
@@ -89,8 +89,10 @@ class Rendering {
         void transfer_by_z(unsigned in_z);
         Parser parser;
         State state;
-        std::vector <double> &original_vertexes = get_vertexes();
         std::vector <double> change_vertexes;
+        std::vector <double> &original_vertexes = parser.get_vertexes();
+        void copy_original_vertex();
+
         void output_vertex(std::vector <double> &nums);
 };
 

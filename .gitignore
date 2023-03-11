@@ -1,0 +1,3 @@
+*.out
+build-view*
+CMakeLists.txt.user

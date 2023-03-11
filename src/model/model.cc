@@ -119,9 +119,16 @@ void Parser::recordIndex(std::string &line) {
   it_indexes++;
 }
 
+void Rendering::copy_original_vertex() {
+  for (unsigned i = 0; i < original_vertexes.size(); i++) {
+    change_vertexes[i] = original_vertexes[i];
+  }
+}
 
-void Rendering::apply_state(std::vector <double> &vertexes) {
-  for (unsigned int i = 0; i < vertexes.size(); i+=3) {
+
+void Rendering::apply_state() {
+  copy_original_vertex();
+  for (unsigned int i = 0; i < change_vertexes.size(); i+=3) {
       rotate_by_x(i+1, i+2);
       rotate_by_y(i, i+2);
       rotate_by_z(i, i+1);
@@ -130,26 +137,26 @@ void Rendering::apply_state(std::vector <double> &vertexes) {
       // transfer_by_y(i+1);
       // transfer_by_z(i+2);
   }
-  output_vertex(change_vertexes);
+  // output_vertex(change_vertexes);
 }
 
 void Rendering::rotate_by_x(unsigned in_y, unsigned in_z) {
-  double tmp_value_y = original_vertexes[in_y];
-  double tmp_value_z = original_vertexes[in_z];
+  double tmp_value_y = change_vertexes[in_y];
+  double tmp_value_z = change_vertexes[in_z];
   change_vertexes[in_y] = tmp_value_y * cos(state.rotate_by_x) + tmp_value_z * sin(state.rotate_by_x);
   change_vertexes[in_z] = tmp_value_z * cos(state.rotate_by_x) - tmp_value_y * sin(state.rotate_by_x);
 }
 
 void Rendering::rotate_by_y(unsigned in_x, unsigned in_z) {
-  double tmp_value_x = original_vertexes[in_x];
-  double tmp_value_z = original_vertexes[in_z];
+  double tmp_value_x = change_vertexes[in_x];
+  double tmp_value_z = change_vertexes[in_z];
   change_vertexes[in_x] = tmp_value_x * cos(state.rotate_by_y) + tmp_value_z * sin(state.rotate_by_y);
   change_vertexes[in_z] = tmp_value_z * cos(state.rotate_by_y) - tmp_value_x * sin(state.rotate_by_y);
 }
 
 void Rendering::rotate_by_z(unsigned in_x, unsigned in_y) {
-  double tmp_value_x = original_vertexes[in_x];
-  double tmp_value_y = original_vertexes[in_y];
+  double tmp_value_x = change_vertexes[in_x];
+  double tmp_value_y = change_vertexes[in_y];
   change_vertexes[in_x] = tmp_value_x * cos(state.rotete_by_z) + tmp_value_y * sin(state.rotete_by_z);
   change_vertexes[in_y] = tmp_value_y * cos(state.rotete_by_z) - tmp_value_x * sin(state.rotete_by_z);
 }
@@ -187,7 +194,7 @@ void Rendering::parse_filename(std::string filename) {
 
 void Rendering::set_state(State input_state) {
   state = input_state;
-  apply_state(parser.get_vertexes());
+  apply_state();
 }
 
 void Rendering::output_vertex(std::vector <double> &nums) {

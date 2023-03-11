@@ -29,10 +29,8 @@ int main() {
     state.transfer_by_z = 0.1;
     Controller rendering;
     rendering.parse_filename("objFiles/cube.obj");
-    output_index(rendering.get_indexes());
     output_vertex(rendering.get_vertexes());
     rendering.set_state(state);
-    output_index(rendering.get_indexes());
     output_vertex(rendering.get_vertexes());
     return 0;
 }

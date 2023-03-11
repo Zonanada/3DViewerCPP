@@ -42,7 +42,7 @@
      <double>6.000000000000000</double>
     </property>
     <property name="singleStep">
-     <double>0.200000000000000</double>
+     <double>0.100000000000000</double>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="rotation_y">
@@ -61,7 +61,7 @@
      <double>6.000000000000000</double>
     </property>
     <property name="singleStep">
-     <double>0.200000000000000</double>
+     <double>0.100000000000000</double>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="rotation_z">
@@ -80,7 +80,7 @@
      <double>6.000000000000000</double>
     </property>
     <property name="singleStep">
-     <double>0.200000000000000</double>
+     <double>0.100000000000000</double>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="scale">
@@ -99,7 +99,7 @@
      <double>10.000000000000000</double>
     </property>
     <property name="singleStep">
-     <double>0.200000000000000</double>
+     <double>0.100000000000000</double>
     </property>
     <property name="value">
      <double>1.000000000000000</double>
