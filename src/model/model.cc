@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "model.h"
 
 
 int Parser::isNum(char symbol) {
@@ -117,4 +117,82 @@ void Parser::recordIndex(std::string &line) {
   }
   indexes[it_indexes] = indexes[it_indexes - countIndexRecord];
   it_indexes++;
+}
+
+
+void Rendering::apply_state(std::vector <double> &vertexes) {
+  for (unsigned int i = 0; i < vertexes.size(); i+=3) {
+      rotate_by_x(i+1, i+2);
+      rotate_by_y(i, i+2);
+      rotate_by_z(i, i+1);
+      // scaling(i, i+1, i+2);
+      // transfer_by_x(i);
+      // transfer_by_y(i+1);
+      // transfer_by_z(i+2);
+  }
+  output_vertex(change_vertexes);
+}
+
+void Rendering::rotate_by_x(unsigned in_y, unsigned in_z) {
+  double tmp_value_y = original_vertexes[in_y];
+  double tmp_value_z = original_vertexes[in_z];
+  change_vertexes[in_y] = tmp_value_y * cos(state.rotate_by_x) + tmp_value_z * sin(state.rotate_by_x);
+  change_vertexes[in_z] = tmp_value_z * cos(state.rotate_by_x) - tmp_value_y * sin(state.rotate_by_x);
+}
+
+void Rendering::rotate_by_y(unsigned in_x, unsigned in_z) {
+  double tmp_value_x = original_vertexes[in_x];
+  double tmp_value_z = original_vertexes[in_z];
+  change_vertexes[in_x] = tmp_value_x * cos(state.rotate_by_y) + tmp_value_z * sin(state.rotate_by_y);
+  change_vertexes[in_z] = tmp_value_z * cos(state.rotate_by_y) - tmp_value_x * sin(state.rotate_by_y);
+}
+
+void Rendering::rotate_by_z(unsigned in_x, unsigned in_y) {
+  double tmp_value_x = original_vertexes[in_x];
+  double tmp_value_y = original_vertexes[in_y];
+  change_vertexes[in_x] = tmp_value_x * cos(state.rotete_by_z) + tmp_value_y * sin(state.rotete_by_z);
+  change_vertexes[in_y] = tmp_value_y * cos(state.rotete_by_z) - tmp_value_x * sin(state.rotete_by_z);
+}
+
+void Rendering::scaling(unsigned in_x, unsigned in_y, unsigned in_z) {
+  change_vertexes[in_x] *= state.scale;
+  change_vertexes[in_y] *= state.scale;
+  change_vertexes[in_z] *= state.scale;
+}
+
+void Rendering::transfer_by_x(unsigned in_x) {
+  change_vertexes[in_x] *= state.transfer_by_x;
+}
+
+void Rendering::transfer_by_y(unsigned in_y) {
+  change_vertexes[in_y] *= state.transfer_by_y;
+}
+
+void Rendering::transfer_by_z(unsigned in_z) {
+  change_vertexes[in_z] *= state.transfer_by_z;
+}
+
+std::vector <double> &Rendering::get_vertexes() {
+  return change_vertexes;
+}
+
+std::vector <unsigned int> &Rendering::get_indexes() {
+  return parser.get_indexes();
+}
+
+void Rendering::parse_filename(std::string filename) {
+  parser.parse_filename(filename);
+  change_vertexes = parser.get_vertexes();
+}
+
+void Rendering::set_state(State input_state) {
+  state = input_state;
+  apply_state(parser.get_vertexes());
+}
+
+void Rendering::output_vertex(std::vector <double> &nums) {
+    for (auto it : nums) {
+        std::cout << it << " "; 
+    }
+    std::cout << "\n";
 }

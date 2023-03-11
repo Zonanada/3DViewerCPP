@@ -86,8 +86,8 @@
    <widget class="QDoubleSpinBox" name="scale">
     <property name="geometry">
      <rect>
-      <x>1280</x>
-      <y>170</y>
+      <x>40</x>
+      <y>240</y>
       <width>131</width>
       <height>26</height>
      </rect>
@@ -146,7 +146,7 @@
    <widget class="QPushButton" name="openFile">
     <property name="geometry">
      <rect>
-      <x>9</x>
+      <x>10</x>
       <y>470</y>
       <width>201</width>
       <height>41</height>
@@ -530,23 +530,42 @@
      <double>1.000000000000000</double>
     </property>
    </widget>
-   <widget class="Rendering" name="openGLWidget">
+   <widget class="GLWidget" name="openGLWidget">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>230</x>
       <y>0</y>
-      <width>1011</width>
-      <height>1001</height>
+      <width>1000</width>
+      <height>1000</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="transfer_z">
+    <property name="geometry">
+     <rect>
+      <x>1280</x>
+      <y>170</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <double>-10.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>10.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.200000000000000</double>
     </property>
    </widget>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Rendering</class>
+   <class>GLWidget</class>
    <extends>QOpenGLWidget</extends>
-   <header location="global">rendering.h</header>
+   <header location="global">glwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

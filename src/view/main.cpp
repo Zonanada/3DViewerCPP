@@ -1,4 +1,3 @@
-/// \file
 #include <QApplication>
 
 #include "./mainwindow.h"

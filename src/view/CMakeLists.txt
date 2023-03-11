@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(GLWidget VERSION 0.1 LANGUAGES CXX C)
+project(GLWidget VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -21,10 +21,11 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        rendering.h
-        rendering.cpp
-        ../backend/parser.c
-        ../backend/parser.h
+        glwidget.h
+        glwidget.cpp
+        ../controller/controller.h
+        ../model/model.cc
+        ../model/model.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
