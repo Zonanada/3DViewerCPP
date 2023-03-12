@@ -20,7 +20,7 @@ void GLWidget::paintGL() {
     glVertexPointer(3, GL_DOUBLE, 0, &data->get_vertexes()[0]);
     glDrawElements(GL_LINES, data->get_indexes().size(), GL_UNSIGNED_INT, &data->get_indexes()[0]);
 
-    glPointSize(GLfloat(widthVertex));
+    glPointSize(GLfloat(3));
     glColor3d(rV, gV, bV);
 
     glDrawArrays(GL_POINTS, 0, data->get_vertexes().size() / 3);

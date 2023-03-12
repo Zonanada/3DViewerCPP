@@ -36,7 +36,7 @@ void output_vertex(std::vector <double> &nums) {
 
 void MainWindow::on_rotation_x_valueChanged() {
     if(ui->fileName->text() != "") data.set_state(getState());
-    std::cout << "state X" << "\n";
+//    std::cout << "state X" << "\n";
 //    output_vertex(data.get_vertexes());
     emit update_render();
 }
