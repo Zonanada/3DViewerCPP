@@ -6,6 +6,7 @@
 #include <string>
 #include "../controller/controller.h"
 #include <iostream>
+#include <QMatrix4x4>
 
 
 class GLWidget : public QOpenGLWidget
@@ -15,9 +16,9 @@ class GLWidget : public QOpenGLWidget
         ~GLWidget();
 
     protected:
-        void initializeGL();
-        void resizeGL();
-        void paintGL();
+        void initializeGL() override;
+        void resizeGL(int w, int h) override;
+        void paintGL() override;
 
     public:
         double rW =0, gW = 0, bW = 0, aW = 0;
@@ -28,6 +29,8 @@ class GLWidget : public QOpenGLWidget
         int perspective, typeLine;
     private:
         Controller *data = nullptr;
+        QMatrix4x4 projection;
+        QQuaternion rotation;
 
     public slots:
         void getData(Controller *input_data);

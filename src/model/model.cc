@@ -61,7 +61,7 @@ void Parser::record() {
             recordIndex(line);
         }
     }
-    int coeff = vertex_max / 0.5;
+    int coeff = vertex_max / 1;
     for (auto it = vertexes.begin(); it != vertexes.end(); it++) {
         *it /= coeff;
     }
@@ -73,20 +73,49 @@ void Parser::record() {
 }
 
 void Parser::recordVertex(std::string &line) {
-  std::cout << line << "\n";
+  // std::cout << line << "\n";
   std::string numStr;
-  for (auto it = line.begin(); it != line.end(); it++) {
-    if (isNum(*it)) {
-      numStr.push_back(*it);
-    } else if (*it == ' '  && !numStr.empty()) {
+  for (unsigned i = 1; i < line.size(); i++) {
+    if (isNum(line[i])){
+      numStr.push_back(line[i]);
+    }
+    if ((line[i] == ' ' || i+1 == line.size() || line[i+1] == '\r' ) && !numStr.empty()) {
+      // std::cout << numStr << "\n";
       vertexes[it_vertexes] = stod(numStr);
       if (abs(vertexes[it_vertexes]) > vertex_max) vertex_max = vertexes[it_vertexes];
       it_vertexes++;
       numStr.clear();
     }
   }
-  vertexes[it_vertexes] = stod(numStr);
-  it_vertexes++;
+}
+
+void Parser::recordIndex(std::string &line) {
+  // std::cout << line << "\n";
+  std::vector <unsigned> nums;
+  std::string numStr;
+  bool firstIndex = true;
+  int countIndexRecord = 0;
+  for (unsigned i = 1; i < line.size(); i++) {
+    if (line[i] != ' ' ) {
+      numStr.push_back(line[i]);
+    }
+  if ((line[i] == ' ' || line[i+1] == '\r' || i+1 == line.size()) && !numStr.empty()) {
+    // std::cout << numStr << "\n";
+    if (numStr[0] != ' ' && numStr[0] != '\r') {
+      nums.push_back(stoi(numStr) - 1);
+    }
+      numStr.clear();
+    }
+  }
+  indexes[it_indexes] = nums[0];
+  indexes[it_indexes + (nums.size() * 2 - 1)] = nums[0];
+  it_indexes++;
+  for (unsigned i = 1; i < nums.size(); i++) {
+      indexes[it_indexes] = nums[i];
+      indexes[it_indexes+1] = nums[i];
+      it_indexes+=2;
+  }
+  it_indexes++;
 }
 
 // void Parser::recordIndex(std::string &line) {
@@ -122,37 +151,7 @@ void Parser::recordVertex(std::string &line) {
 //   it_indexes++;
 // }
 
-void Parser::recordIndex(std::string &line) {
-  std::cout << line << "\n";
-  std::vector <unsigned> nums;
-  std::string numStr;
-  bool firstIndex = true;
-  int countIndexRecord = 0;
-  for (unsigned i = 1; i < line.size(); i++) {
-    if (line[i] != ' ') {
-      numStr.push_back(line[i]);
-    }
-    if ((line[i] == ' ' || line[i] == '\r' || i+1 == line.size()) && !numStr.empty()) {
-      nums.push_back(stoi(numStr) - 1);
-      numStr.clear();
-    }
-  }
 
-  indexes[it_indexes] = nums[0];
-  indexes[it_indexes + (nums.size() * 2 - 1)] = nums[0];
-  it_indexes++;
-  for (unsigned i = 1; i < nums.size(); i++) {
-      indexes[it_indexes] = nums[i];
-      indexes[it_indexes+1] = nums[i];
-      it_indexes+=2;
-  }
-  it_indexes++;
-  // indexes[it_indexes] = nums[0];
-  // it_indexes++;
-
-  // std::cout << numStr << "\n";
-  // std::cout << "\n";
-}
 
 void Rendering::first_theard_copy() {
   for (unsigned i = 0; i < original_vertexes.size(); i+=2) {

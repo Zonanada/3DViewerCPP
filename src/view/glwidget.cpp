@@ -7,9 +7,34 @@ GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent) {
 GLWidget::~GLWidget() {}
 
 
-void GLWidget::initializeGL() { glEnable(GL_DEPTH_TEST); }
+void GLWidget::initializeGL() {
+    glEnable(GL_DEPTH_TEST);
+}
+
+void GLWidget::resizeGL(int w, int h) {
+    qreal aspect = qreal(w) / qreal(h ? h : 1);
+//    const qreal zNear = 3.0, zFar = 7.0, fov = 45.0;
+    float fov = 60.0 * M_PI / 180;  // 60 угол в градусах
+    float heapHeight = 2 / (2 * tan(fov / 2));
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+//    glOrtho(-2, 2, -2, 2, -2, 2);
+    glFrustum(-2, 2, -2, 2, -3, -7);
+
+
+
+
+//    projection.setToIdentity();
+//    projection.perspective(fov, aspect, zNear, zFar);
+
+}
 
 void GLWidget::paintGL() {
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    QMatrix4x4 matrix;
+//    matrix.translate(0.0, 0.0, -5.0);
+//    matrix.rotate(rotation);
+
     glClearColor(rW, gW, bW, aW);
     glEnable(GL_BLEND);
     glEnable(GL_LINE_STIPPLE);
