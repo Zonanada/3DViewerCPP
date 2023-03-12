@@ -19,7 +19,7 @@ void GLWidget::resizeGL(int w, int h) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 //    glOrtho(-2, 2, -2, 2, -2, 2);
-    glFrustum(-2, 2, -2, 2, -3, -7);
+    glFrustum(-2, 2, -2, 2, 3, 7);
 
 
 
