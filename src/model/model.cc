@@ -89,6 +89,7 @@ void Parser::recordVertex(std::string &line) {
   }
 }
 
+
 void Parser::recordIndex(std::string &line) {
   // std::cout << line << "\n";
   std::vector <unsigned> nums;
@@ -256,6 +257,7 @@ void Rendering::apply_state() {
   });
 
   first_theard_state();
+
   second_state.join();
   third_state.join();
   four_state.join();
@@ -263,9 +265,7 @@ void Rendering::apply_state() {
   sixth_state.join();
   seventh_state.join();
   eighth_state.join();
-  
 }
-
 
 void Rendering::apply_state_run(unsigned i) {
   rotate_by_x(i+1, i+2);
@@ -277,6 +277,19 @@ void Rendering::apply_state_run(unsigned i) {
   transfer_by_z(i+2);
 }
 
+void Rendering::set_projection(bool have_or_not) {
+  projection = have_or_not;
+  if (projection) {
+    offset_along_z = -5;
+  } else {
+    offset_along_z = 0;
+  }
+  apply_state();
+}
+
+bool Rendering::get_projection() {
+  return projection;
+}
 
 void Rendering::rotate_by_x(unsigned in_y, unsigned in_z) {
   double tmp_value_y = change_vertexes[in_y];
@@ -314,7 +327,7 @@ void Rendering::transfer_by_y(unsigned in_y) {
 }
 
 void Rendering::transfer_by_z(unsigned in_z) {
-  change_vertexes[in_z] += state.transfer_by_z;
+  change_vertexes[in_z] += (state.transfer_by_z + offset_along_z);
 }
 
 std::vector <double> &Rendering::get_vertexes() {

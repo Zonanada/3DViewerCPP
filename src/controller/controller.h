@@ -18,6 +18,12 @@ class Controller {
         std::vector <unsigned int> &get_indexes() {
             return rendering->get_indexes();
         }
+        bool get_projection() {
+            return rendering->get_projection();
+        }
+        void set_projection(bool have_or_not) {
+            rendering->set_projection(have_or_not);
+        }
 
         ~Controller(){
             delete rendering;

@@ -48,6 +48,8 @@ private slots:
 
 
 
+    void on_projection_clicked();
+
 private:
     State getState();
     Controller data;

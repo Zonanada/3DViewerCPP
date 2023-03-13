@@ -147,5 +147,15 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 }
 
 
-
+void MainWindow::on_projection_clicked() {
+    QString text_button = ui->projection->text();
+    if (text_button == "Параллельная") {
+        ui->projection->setText("Центральная");
+        data.set_projection(true);
+    } else {
+        ui->projection->setText("Параллельная");
+        data.set_projection(false);
+    }
+    emit update_render();
+}
 

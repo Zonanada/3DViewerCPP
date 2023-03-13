@@ -559,6 +559,32 @@
      <double>0.200000000000000</double>
     </property>
    </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>590</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Проекция</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="projection">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>630</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Параллельная</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <customwidgets>
