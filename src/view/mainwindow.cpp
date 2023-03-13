@@ -161,8 +161,8 @@ void MainWindow::on_type_line_clicked() {
         ui->type_line->setText("Пунктирная");
         size_and_color.line_stipple = true;
     } else {
-        size_and_color.line_stipple = false;
         ui->type_line->setText("Сплошная");
+        size_and_color.line_stipple = false;
     }
     emit update_render();
 }
