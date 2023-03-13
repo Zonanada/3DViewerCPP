@@ -3,3 +3,4 @@ build-view*
 CMakeLists.txt.user
 .vscode
 objFiles/Mil_Mi8AMTSh.obj
+.DS_Store

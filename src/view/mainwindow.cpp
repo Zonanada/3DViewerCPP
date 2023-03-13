@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
   connect(this, &MainWindow::setData, ui->openGLWidget, &GLWidget::getData);
   connect(this, &MainWindow::update_render, ui->openGLWidget, &GLWidget::update_render);
-  emit setData(&data);
+  emit setData(&data, &size_and_color);
 //  connect(this, &MainWindow::setLook, ui->openGLWidget, &Rendering::setLook);
 //  connect(this, &MainWindow::setProjection, ui->openGLWidget, &Rendering::setProjection);
 }
@@ -36,8 +36,6 @@ void output_vertex(std::vector <double> &nums) {
 
 void MainWindow::on_rotation_x_valueChanged() {
     if(ui->fileName->text() != "") data.set_state(getState());
-//    std::cout << "state X" << "\n";
-//    output_vertex(data.get_vertexes());
     emit update_render();
 }
 
@@ -79,60 +77,57 @@ void MainWindow::on_transfer_z_valueChanged() {
 
 void MainWindow::on_openFile_clicked() {
     QString fileName = QFileDialog::getOpenFileName(this, "Выберете файл", QDir::homePath());
-    ui->fileName->setText(fileName);
-    data.parse_filename(fileName.toStdString());
-    QString vertexCount = "Вершин: " + QString::number(data.get_vertexes().size() / 3);
-    QString ribsCount = "Рёбер: " + QString::number(data.get_indexes().size() / 2);
-    ui->countVertex->setText(vertexCount);
-    ui->countIndex->setText(ribsCount);
-    data.set_state(getState());
+    if (!fileName.isEmpty()) {
+        ui->fileName->setText(fileName);
+        data.parse_filename(fileName.toStdString());
+        QString vertexCount = "Вершин: " + QString::number(data.get_vertexes().size() / 3);
+        QString ribsCount = "Рёбер: " + QString::number(data.get_indexes().size() / 2);
+        ui->countVertex->setText(vertexCount);
+        ui->countIndex->setText(ribsCount);
+        data.set_state(getState());
+        emit update_render();
+    }
+}
+
+void MainWindow::change_look() {
+    size_and_color.red_widget = ui->rW->value();
+    size_and_color.green_widget = ui->gW->value();
+    size_and_color.blue_widget = ui->bW->value();
+    size_and_color.alpha_widget = ui->aW->value();
+    size_and_color.red_line = ui->rL->value();
+    size_and_color.green_line = ui->gL->value();
+    size_and_color.blue_line = ui->bL->value();
+    size_and_color.red_vertex = ui->rV->value();
+    size_and_color.green_vertex = ui->gV->value();
+    size_and_color.blue_vertex = ui->bV->value();
+    size_and_color.width_vertex = ui->widthVertex->value();
+    size_and_color.width_line = ui->widthLine->value();
     emit update_render();
 }
 
+void MainWindow::on_rW_valueChanged() { change_look(); }
 
-//look_st *MainWindow::getLook() {
-//  look_st *look = new look_st;
-//  look->rW = ui->rW->value();
-//  look->gW = ui->gW->value();
-//  look->bW = ui->bW->value();
-//  look->aW = ui->aW->value();
+void MainWindow::on_gW_valueChanged() { change_look(); }
 
-//  look->rL = ui->rL->value();
-//  look->gL = ui->gL->value();
-//  look->bL = ui->bL->value();
+void MainWindow::on_bW_valueChanged() { change_look(); }
 
-//  look->rV = ui->rV->value();
-//  look->gV = ui->gV->value();
-//  look->bV = ui->bV->value();
+void MainWindow::on_aW_valueChanged() { change_look(); }
 
-//  look->widthLine = ui->widthLine->value();
-//  look->widthVertex = ui->widthVertex->value();
-//  return look;
-//}
+void MainWindow::on_rV_valueChanged() { change_look(); }
 
-//void MainWindow::on_rW_valueChanged() { emit setLook(getLook()); }
+void MainWindow::on_gV_valueChanged() { change_look(); }
 
-//void MainWindow::on_gW_valueChanged() { emit setLook(getLook()); }
+void MainWindow::on_bV_valueChanged() { change_look(); }
 
-//void MainWindow::on_bW_valueChanged() { emit setLook(getLook()); }
+void MainWindow::on_rL_valueChanged() { change_look(); }
 
-//void MainWindow::on_aW_valueChanged() { emit setLook(getLook()); }
+void MainWindow::on_gL_valueChanged() { change_look(); }
 
-//void MainWindow::on_rV_valueChanged() { emit setLook(getLook()); }
+void MainWindow::on_bL_valueChanged() { change_look(); }
 
-//void MainWindow::on_gV_valueChanged() { emit setLook(getLook()); }
+void MainWindow::on_widthLine_valueChanged() { change_look(); }
 
-//void MainWindow::on_bV_valueChanged() { emit setLook(getLook()); }
-
-//void MainWindow::on_rL_valueChanged() { emit setLook(getLook()); }
-
-//void MainWindow::on_gL_valueChanged() { emit setLook(getLook()); }
-
-//void MainWindow::on_bL_valueChanged() { emit setLook(getLook()); }
-
-//void MainWindow::on_widthLine_valueChanged() { emit setLook(getLook()); }
-
-//void MainWindow::on_widthVertex_valueChanged() { emit setLook(getLook()); }
+void MainWindow::on_widthVertex_valueChanged() { change_look(); }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
@@ -155,6 +150,19 @@ void MainWindow::on_projection_clicked() {
     } else {
         ui->projection->setText("Параллельная");
         data.set_projection(false);
+    }
+    emit update_render();
+}
+
+
+void MainWindow::on_type_line_clicked() {
+    QString type_line = ui->type_line->text();
+    if (type_line == "Сплошная") {
+        ui->type_line->setText("Пунктирная");
+        size_and_color.line_stipple = true;
+    } else {
+        size_and_color.line_stipple = false;
+        ui->type_line->setText("Сплошная");
     }
     emit update_render();
 }

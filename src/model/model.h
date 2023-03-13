@@ -140,21 +140,7 @@ struct State {
     double transfer_by_z;
 };
 
-// typedef struct size_color {
-//     double rL;
-//     double gL;
-//     double bL;
-//     double rV;
-//     double gV;
-//     double bV;
-//     double rW;
-//     double gW;
-//     double bW;
-//     double aW;
-//     double widthLine;
-//     double widthVertex;
-//     int typeLine;
-// } look_st; 
+
 
 
 class Parser {

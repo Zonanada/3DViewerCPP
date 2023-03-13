@@ -12,16 +12,8 @@ void GLWidget::initializeGL() {
 }
 
 void GLWidget::resizeGL(int w, int h) {
-//    qreal aspect = qreal(w) / qreal(h ? h : 1);
-//    float fov = 60.0 * M_PI / 180;
-//    float heapHeight = 2 / (2 * tan(fov / 2));
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
-
-
-
-
 
 }
 
@@ -29,29 +21,33 @@ void GLWidget::paintGL() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     if (data->get_projection()) {
-        glFrustum(-1.25, 1.25, -1.25, 1.25, 3, 7);
+        glFrustum(-1.12, 1.12, -1.12, 1.12, 3, 7);
     } else {
-        glOrtho(-2, 2, -2, 2, -2, 2);
+        glOrtho(-1.85, 1.85, -1.85, 1.85, -2, 2);
     }
-    glClearColor(rW, gW, bW, aW);
+    glClearColor(size_and_color->red_widget, size_and_color->green_widget, size_and_color->blue_widget, size_and_color->alpha_widget);
+    if (size_and_color->line_stipple) {
+        glLineStipple(2,0X00FF);
+    }
     glEnable(GL_BLEND);
     glEnable(GL_LINE_STIPPLE);
-    glLineWidth(widthLine);
-    glColor3d(rL, gL, bL);
+    glLineWidth(size_and_color->width_line);
+    glColor3d(size_and_color->red_line, size_and_color->green_line, size_and_color->blue_line);
     glEnableClientState(GL_VERTEX_ARRAY);
 
     glVertexPointer(3, GL_DOUBLE, 0, &data->get_vertexes()[0]);
     glDrawElements(GL_LINES, data->get_indexes().size(), GL_UNSIGNED_INT, &data->get_indexes()[0]);
 
-    glPointSize(GLfloat(3));
-    glColor3d(rV, gV, bV);
+    glPointSize(GLfloat(size_and_color->width_vertex));
+    glColor3d(size_and_color->red_vertex, size_and_color->green_vertex, size_and_color->blue_vertex);
 
     glDrawArrays(GL_POINTS, 0, data->get_vertexes().size() / 3);
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void GLWidget::getData(Controller *input_data) {
+void GLWidget::getData(Controller *input_data, Size_and_color *input_size_and_color) {
     data = input_data;
+    size_and_color = input_size_and_color;
 }
 
 void GLWidget::update_render() {

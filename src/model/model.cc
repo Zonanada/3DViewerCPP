@@ -118,42 +118,6 @@ void Parser::recordIndex(std::string &line) {
   }
   it_indexes++;
 }
-
-// void Parser::recordIndex(std::string &line) {
-//   std::string numStr;
-//   bool met_index = false;
-//   bool firstIndex = true;
-//   int countIndexRecord = 0;
-//   for (auto it = line.begin(); it != line.end(); it++) {
-//     if (isNum(*it) && !met_index) {
-//       numStr.push_back(*it);
-//   } else if (!met_index && *it == '/') {
-//       met_index = true;
-//   } else if ((*it == ' ' || it + 1 == line.end()) && !numStr.empty()) {
-//       met_index = false;
-//       unsigned int pushNum = stoi(numStr) - 1;
-//       if (firstIndex) {
-//         indexes[it_indexes] = pushNum;
-//         it_indexes++;
-//         firstIndex = false;
-//         countIndexRecord++;
-//       } else {
-//         indexes[it_indexes] = pushNum;
-//         it_indexes++;
-//         countIndexRecord++;
-//         indexes[it_indexes] = pushNum;
-//         it_indexes++;
-//         countIndexRecord++;
-//       }
-//       numStr.clear();
-//     }
-//   }
-//   indexes[it_indexes] = indexes[it_indexes - countIndexRecord];
-//   it_indexes++;
-// }
-
-
-
 void Rendering::first_theard_copy() {
   for (unsigned i = 0; i < original_vertexes.size(); i+=2) {
     // std::cout << "1 поток\n";

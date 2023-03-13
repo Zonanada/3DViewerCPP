@@ -6,8 +6,8 @@ all: install
 
 .PHONY: install
 install:
-	cd ../build && cmake ../src/rendering/. && make
-	../build/GLWidget
+	cd ../build && cmake ../src/view/. && make
+	open ../build/GLWidget.app
 
 .PHONY: uninstall
 uninstall:
