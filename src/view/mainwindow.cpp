@@ -8,9 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
   connect(this, &MainWindow::setData, ui->openGLWidget, &GLWidget::getData);
   connect(this, &MainWindow::update_render, ui->openGLWidget, &GLWidget::update_render);
-  emit setData(&data, &size_and_color);
-//  connect(this, &MainWindow::setLook, ui->openGLWidget, &Rendering::setLook);
-//  connect(this, &MainWindow::setProjection, ui->openGLWidget, &Rendering::setProjection);
+  emit setData(&data, &look);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -90,18 +88,18 @@ void MainWindow::on_openFile_clicked() {
 }
 
 void MainWindow::change_look() {
-    size_and_color.red_widget = ui->rW->value();
-    size_and_color.green_widget = ui->gW->value();
-    size_and_color.blue_widget = ui->bW->value();
-    size_and_color.alpha_widget = ui->aW->value();
-    size_and_color.red_line = ui->rL->value();
-    size_and_color.green_line = ui->gL->value();
-    size_and_color.blue_line = ui->bL->value();
-    size_and_color.red_vertex = ui->rV->value();
-    size_and_color.green_vertex = ui->gV->value();
-    size_and_color.blue_vertex = ui->bV->value();
-    size_and_color.width_vertex = ui->widthVertex->value();
-    size_and_color.width_line = ui->widthLine->value();
+    look.red_widget = ui->rW->value();
+    look.green_widget = ui->gW->value();
+    look.blue_widget = ui->bW->value();
+    look.alpha_widget = ui->aW->value();
+    look.red_line = ui->rL->value();
+    look.green_line = ui->gL->value();
+    look.blue_line = ui->bL->value();
+    look.red_vertex = ui->rV->value();
+    look.green_vertex = ui->gV->value();
+    look.blue_vertex = ui->bV->value();
+    look.width_vertex = ui->widthVertex->value();
+    look.width_line = ui->widthLine->value();
     emit update_render();
 }
 
@@ -159,10 +157,26 @@ void MainWindow::on_type_line_clicked() {
     QString type_line = ui->type_line->text();
     if (type_line == "Сплошная") {
         ui->type_line->setText("Пунктирная");
-        size_and_color.line_stipple = true;
+        look.line_stipple = true;
     } else {
         ui->type_line->setText("Сплошная");
-        size_and_color.line_stipple = false;
+        look.line_stipple = false;
+    }
+    emit update_render();
+}
+
+
+void MainWindow::on_type_vertex_clicked() {
+    QString type_vertex = ui->type_vertex->text();
+    if (type_vertex == "Квадратные") {
+        look.type_vectors = "Круглые";
+        ui->type_vertex->setText("Круглые");
+    } else if (type_vertex == "Круглые") {
+        look.type_vectors = "Нет";
+        ui->type_vertex->setText("Нет");
+    } else {
+        look.type_vectors = "Квадратные";
+        ui->type_vertex->setText("Квадратные");
     }
     emit update_render();
 }

@@ -16,6 +16,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS OpenGLWidgets)
 find_package(Qt6 REQUIRED COMPONENTS Gui)
 
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
@@ -25,7 +26,7 @@ set(PROJECT_SOURCES
         glwidget.cpp
         ../controller/controller.h
         ../model/model.cc
-        ../model/model.h
+        ../model/parser.cc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

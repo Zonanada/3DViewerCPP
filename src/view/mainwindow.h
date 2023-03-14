@@ -1,13 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-//#include "glwidget.h"
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QMouseEvent>
 #include "../controller/controller.h"
 
-struct Size_and_color {
+struct Look {
     double red_line = 0;
     double green_line = 1;
     double blue_line = 0;
@@ -21,6 +20,8 @@ struct Size_and_color {
     double width_line = 1;
     double width_vertex = 3;
     bool line_stipple = false;
+    QString type_vectors = "square";
+    bool draw_vectors = true;
 };
 
 QT_BEGIN_NAMESPACE
@@ -44,12 +45,10 @@ private slots:
     void on_transfer_z_valueChanged();
     void on_scale_valueChanged();
     void on_openFile_clicked();
-
     void on_rW_valueChanged();
     void on_gW_valueChanged();
     void on_bW_valueChanged();
     void on_aW_valueChanged();
-
     void on_rV_valueChanged();
     void on_gV_valueChanged();
     void on_bV_valueChanged();
@@ -61,15 +60,14 @@ private slots:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void on_projection_clicked();
-
     void on_type_line_clicked();
+    void on_type_vertex_clicked();
 
 private:
     State getState();
     Ui::MainWindow *ui;
     Controller data;
-    Size_and_color size_and_color;
-//    Rendering *rendering;
+    Look look;
     double pos_mouse_x;
     double pos_mouse_y;
 
@@ -79,11 +77,8 @@ public:
 
 
 signals:
-//    void setState(state_st *state);
-    void setData(Controller *data, Size_and_color *size_and_color);
+    void setData(Controller *data, Look *Look);
     void update_render();
-//    void setLook(look_st *look);
-//    void setProjection();
 
 };
 #endif // MAINWINDOW_H

@@ -6,7 +6,6 @@
 #include <string>
 #include "../controller/controller.h"
 #include <iostream>
-#include <QMatrix4x4>
 #include <mainwindow.h>
 
 
@@ -23,16 +22,11 @@ class GLWidget : public QOpenGLWidget
 
     private:
         Controller *data = nullptr;
-        Size_and_color *size_and_color;
-        QMatrix4x4 projection;
-        QQuaternion rotation;
+        Look *look;
 
     public slots:
-        void getData(Controller *input_data, Size_and_color *input_size_and_color);
+        void getData(Controller *input_data, Look *input_look);
         void update_render();
-//        void setFilename(char *name);
-//        void setLook(look_st *look);
-//        void setProjection();
 
 };
 

@@ -25,75 +25,44 @@ void GLWidget::paintGL() {
     } else {
         glOrtho(-1.85, 1.85, -1.85, 1.85, -2, 2);
     }
-    glClearColor(size_and_color->red_widget, size_and_color->green_widget, size_and_color->blue_widget, size_and_color->alpha_widget);
-    if (size_and_color->line_stipple) {
-        glLineStipple(2,0X00FF);
-    }
+    glClearColor(look->red_widget, look->green_widget, look->blue_widget, look->alpha_widget);
+
     glEnable(GL_BLEND);
     glEnable(GL_LINE_STIPPLE);
-    glLineWidth(size_and_color->width_line);
-    glColor3d(size_and_color->red_line, size_and_color->green_line, size_and_color->blue_line);
+    glLineWidth(look->width_line);
+    glColor3d(look->red_line, look->green_line, look->blue_line);
     glEnableClientState(GL_VERTEX_ARRAY);
-
     glVertexPointer(3, GL_DOUBLE, 0, &data->get_vertexes()[0]);
+
+    if (look->line_stipple) {
+        glDisable(GL_LINE_STIPPLE);
+        glEnable(GL_LINE_STIPPLE);
+        glLineStipple(2,0X00FF);
+    } else{
+        glDisable(GL_LINE_STIPPLE);
+    }
+
     glDrawElements(GL_LINES, data->get_indexes().size(), GL_UNSIGNED_INT, &data->get_indexes()[0]);
+    glPointSize(GLfloat(look->width_vertex));
+    glColor3d(look->red_vertex, look->green_vertex, look->blue_vertex);
 
-    glPointSize(GLfloat(size_and_color->width_vertex));
-    glColor3d(size_and_color->red_vertex, size_and_color->green_vertex, size_and_color->blue_vertex);
+    if (look->type_vectors != "Нет") {
+        glDisable(GL_POINT_SMOOTH);
+        if (look->type_vectors == "Круглые") {
+            glEnable(GL_POINT_SMOOTH);
+        }
+        glDrawArrays(GL_POINTS, 0, data->get_vertexes().size() / 3);
+    }
 
-    glDrawArrays(GL_POINTS, 0, data->get_vertexes().size() / 3);
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void GLWidget::getData(Controller *input_data, Size_and_color *input_size_and_color) {
+void GLWidget::getData(Controller *input_data, Look *input_look) {
     data = input_data;
-    size_and_color = input_size_and_color;
+    look = input_look;
 }
 
 void GLWidget::update_render() {
     update();
 }
 
-
-//void GLWidget::setState(state_st *state) {
-//  stateСhange(&data->vertex, state);
-//  update();
-//}
-
-
-//void GLWidget::setFilename(char *name) {
-//  if (data != NULL) {
-//    deleteData(data);
-//  }
-//  data = getData(name);
-//  update();
-//}
-
-//void GLWidget::setLook(look_st *look) {
-//  rW = look->rW;
-//  gW = look->gW;
-//  bW = look->bW;
-//  aW = look->aW;
-
-//  rV = look->rV;
-//  gV = look->gV;
-//  bV = look->bV;
-
-//  rL = look->rL;
-//  gL = look->gL;
-//  bL = look->bL;
-
-//  widthLine = look->widthLine;
-//  widthVertex = look->widthVertex;
-//  update();
-//}
-
-
-//void GLWidget::setProjection() {
-//  if (perspective == 1) {
-//    perspective = 0;
-//  } else {
-//    perspective = 1;
-//  }
-//  update();
-//}
