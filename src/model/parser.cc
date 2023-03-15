@@ -1,5 +1,6 @@
 #include "parser.h"
 
+
 int Parser::isNum(char symbol) {
   return (symbol >= '0' && symbol <= '9') || symbol == ',' || symbol == '.' ||
          symbol == '-' || symbol == '+';
@@ -90,8 +91,6 @@ void Parser::recordVertex(std::string &line) {
 void Parser::recordIndex(std::string &line) {
   std::vector <unsigned> nums;
   std::string numStr;
-  bool firstIndex = true;
-  int countIndexRecord = 0;
   for (unsigned i = 1; i < line.size(); i++) {
     if (line[i] != ' ' ) {
       numStr.push_back(line[i]);

@@ -1,26 +1,49 @@
 #include <gtest/gtest.h>
-#include "../backend/parser.cc"
+#include "../model/parser.cc"
 #include <vector>
 
-TEST(qwefq, qefqegr) {
-    Parser cube("../objFiles/cube.obj");
-    std::vector<unsigned int> arrIndexRes = {1, 2, 2, 3, 3, 1, 7, 6, 6, 5, 5, 7, 4, 5, 5, 1, 1, 4, 5, 6, 6, 2, 2, 5, 2, 6, 6, 7, 7, 2, 0, 3, 3, 7, 7, 0, 0, 1, 1, 3, 3, 0, 4, 7, 7, 5, 5, 4, 0, 4, 4, 1, 1, 0, 1, 5, 5, 2, 2, 1, 3, 2, 2, 7, 7, 3, 4, 0, 0, 7, 7, 4};
-    std::vector<double> arrVertexRes = {0.500000, -0.500000, -0.500000, 0.500000, -0.500000, 0.500000, -0.500000, -0.500000, 0.500000, -0.500000, -0.500000, -0.500000, 0.500000, 0.500000, -0.500000, 0.500000, 0.500000, 0.500000, -0.500000, 0.500000, 0.500000, -0.500000, 0.500000, -0.500000};
-    bool result_vertex = false;
-    bool result_index = false;
-    auto vertexes = cube.get_vertexes();
-    auto indexes = cube.get_indexes();
-    for (size_t i = 0; i < vertexes.size(); i++) {
-        if (vertexes[i] != arrVertexRes[i]) result_vertex = true;
-    }
-    for (size_t i = 0; i < indexes.size(); i++) {
-        if (indexes[i] != arrIndexRes[i]) result_index = true;
-    }
-
-    EXPECT_EQ(result_vertex, false);
-    EXPECT_EQ(result_index, false);
+TEST(ParserTest, ReadFileException) {
+  ASSERT_THROW(Parser("nonexistent_file.obj"), std::out_of_range);
 }
 
+// TEST(ParserTest, RecordVertexTest) {
+// Parser parser;
+// std::string line = "v 1.000000 -1.000000 -1.000000";
+// parser.recordVertex(line);
+// std::vector<double> expected_vertexes = {1.000000, -1.000000, -1.000000};
+// ASSERT_EQ(parser.get_vertexes(), expected_vertexes);
+// }
+
+// TEST(ParserTest, RecordIndexTest) {
+// Parser parser;
+// std::string line = "f 1 2 3 4";
+// parser.recordIndex(line);
+// std::vector<unsigned int> expected_indexes = {1, 2, 2, 3, 3, 4, 4, 1};
+// ASSERT_EQ(parser.get_indexes(), expected_indexes);
+// }
+
+TEST(ParserTest, ReadingTest) {
+Parser parser("../objFiles/cube.obj");
+std::vector<double> expected_vertexes = {-1.000000, -1.000000, 1.000000, -1.000000, 1.000000, 1.000000,
+1.000000, 1.000000, 1.000000, 1.000000, -1.000000, 1.000000,
+-1.000000, -1.000000, -1.000000, -1.000000, 1.000000, -1.000000,
+1.000000, 1.000000, -1.000000, 1.000000, -1.000000, -1.000000};
+ASSERT_EQ(parser.get_vertexes(), expected_vertexes);
+std::vector<unsigned int> expected_indexes = { 0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 1, 5, 5, 1, 0, 4, 4, 0, 2, 6, 6, 2, 3, 7, 7, 3};
+ASSERT_EQ(parser.get_indexes(), expected_indexes);
+}
+
+TEST(ParserTest, ParseFilenameTest) {
+Parser parser;
+parser.parse_filename("../objFiles/cube.obj");
+std::vector<double> expected_vertexes = {-1.000000, -1.000000, 1.000000, -1.000000, 1.000000, 1.000000,
+1.000000, 1.000000, 1.000000, 1.000000, -1.000000, 1.000000,
+-1.000000, -1.000000, -1.000000, -1.000000, 1.000000, -1.000000,
+1.000000, 1.000000, -1.000000, 1.000000, -1.000000, -1.000000};
+ASSERT_EQ(parser.get_vertexes(), expected_vertexes);
+std::vector<unsigned int> expected_indexes = {1, 2, 3, 4, 5, 6, 7, 8, 2, 6, 1, 5, 3, 7, 4, 8};
+ASSERT_EQ(parser.get_indexes(), expected_indexes);
+}
 
 int main(int argc, char **argv)
 {

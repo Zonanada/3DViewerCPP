@@ -34,7 +34,7 @@ s21_3DViever.a: o_files
 
 .PHONY: o_files
 o_files:
-	$(CC) $(FLAGS)  -c ./backend/parser.cc -o parser.o
+	$(CC) $(FLAGS)  -c ./model/parser.cc -o parser.o
 
 .PHONY: clean
 clean: uninstall
